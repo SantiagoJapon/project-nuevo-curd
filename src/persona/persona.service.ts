@@ -20,15 +20,18 @@ export class PersonaService {
         return persona;
     }
 
-    createPersona(CreatePersonaDTO : CreatePersonaDTO): Promise<Persona>{
-
+    async createPersona(createPersonaDTO : CreatePersonaDTO): Promise<Persona> {
+        const persona =  new this.personaModel(createPersonaDTO);
+        return await persona.save();
     }
 
-    deletePersona(){
-
+    async deletePersona(personaID: String): Promise<Persona>{
+        const deletePersona = await this.personaModel.findByIdAndDelete(personaID);
+        return deletePersona;
     }
-
-    updatePersona(){
-
+    
+    async updatePersona(personaID: String, createPersonaDTO: CreatePersonaDTO): Promise<Persona>{
+        const updatePersona = await this.personaModel.findByIdAndUpdate(personaID, createPersonaDTO, {new: true});
+        return updatePersona;
     }
 }
