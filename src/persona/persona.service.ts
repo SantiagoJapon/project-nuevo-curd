@@ -31,7 +31,8 @@ export class PersonaService {
     }
     
     async updatePersona(personaID: String, createPersonaDTO: CreatePersonaDTO): Promise<Persona>{
-        const updatePersona = await this.personaModel.findByIdAndUpdate(personaID, createPersonaDTO, {new: true});
+        const updatePersona = await this.personaModel.findByIdAndUpdate
+        (personaID, createPersonaDTO, {new: true});
         return updatePersona;
     }
 }
