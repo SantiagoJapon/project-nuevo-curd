@@ -5,11 +5,12 @@ import { PersonaModule } from './persona/persona.module';
 import { MongooseModule } from '@nestjs/mongoose/dist/mongoose.module';
 import { DataController } from './data/data.controller';
 import { QrModule } from './qr/qr.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports : [
     PersonaModule, 
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/personas-pasante'), QrModule],
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/personas-pasante'), QrModule, AuthModule],
   controllers: [AppController, DataController],
   providers: [AppService],
 })

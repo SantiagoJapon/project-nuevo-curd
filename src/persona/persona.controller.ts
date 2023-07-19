@@ -2,6 +2,9 @@ import { Controller, Get, Post, Delete, Res, HttpStatus, Body, Param, NotFoundEx
 
 import { CreatePersonaDTO } from './dto/persona.dto';
 import { PersonaService } from './persona.service';
+import { response } from 'express';
+import axios from 'axios';
+import * as qrcode from 'qrcode';
 
 @Controller('persona')
 export class PersonaController {
@@ -24,7 +27,7 @@ export class PersonaController {
         const persona = await this.personaService.getPersonas();
         return res.status(HttpStatus.OK).json({
             persona
-        }) 
+        }); 
     } 
     
     @Get('/:personaID')
@@ -32,7 +35,7 @@ export class PersonaController {
         const persona = await this.personaService.getPersona(personaID);
         if(!persona) throw new NotFoundException('Person Does not exist');
         return res.status(HttpStatus.OK).json(persona);
-    }
+    };
 
     @Delete('/delete')
     async deletePersona(@Res() res, @Query('personaID') personaID){
@@ -42,7 +45,7 @@ export class PersonaController {
             message: 'Persona eliminada correctamente',
             personaDeleted
         });
-    }
+    };
 
     @Put('/update')
     async updatePersona(@Res() res, @Body() createPersonaDTO: CreatePersonaDTO, @Query('personaID') personaID){
@@ -52,5 +55,5 @@ export class PersonaController {
             message : 'Persona actualizada correctamente',
             updatePersona
         });
-    }
-} 
+    };
+}
